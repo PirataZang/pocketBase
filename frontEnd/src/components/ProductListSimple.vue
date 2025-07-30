@@ -9,7 +9,7 @@
                     </div>
                     <div class="details">
                         <h3><b>{{product?.title}}</b></h3>
-                        <p> R$ {{ product?.price }}</p>
+                        <p> R$ {{ product?.amount_descount ?? product?.amount }}</p>
                     </div>
                 </router-link>
             </div>
@@ -19,7 +19,6 @@
 
 <script>
 import collect from 'collect.js';
-import pb from '../pocketBase'
 
 export default {
     name: 'ProductListSimple',

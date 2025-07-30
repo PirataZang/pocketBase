@@ -1,40 +1,36 @@
 // src/main.js
-import { createApp, defineAsyncComponent } from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
+import pb from './pocketBase' // PocketBase
 
 // Estilos
 import './styles/default.scss'
 import './styles/tailwind.css'
 
-
 // Carrossel de imagens
 import 'vue3-carousel/carousel.css'
-
 import '@fortawesome/fontawesome-free/css/all.min.css'
 
-
-// Componentes Globais
-import api from './api';
-
-
-// Componentes
+// Componentes globais e API
+import api from './api'
 import Modal from './components/utils/Modal.vue'
 import Product from './components/Product.vue'
 
 const app = createApp(App)
 
 // #########################
-// ### GLOBAL COMPONENTS ###
+// ### GLOBAL PROPERTIES ###
 // #########################
-app.config.globalProperties.$api = api;
+app.config.globalProperties.$api = api
+app.config.globalProperties.$pb = pb // 👈 Agora o pb tá global!
 
-app.component('Modal', Modal);
+// ########################
+// ### GLOBAL COMPONENTS ###
+// ########################
+app.component('Modal', Modal)
 app.component('Product', Product)
-
-
-
 
 // ##################
 // ### DIRECTIVES ###
@@ -57,4 +53,5 @@ app.directive('disabled', {
     }
 })
 
+// Finaliza
 app.use(router).mount('#app')

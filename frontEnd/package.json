@@ -17,6 +17,7 @@
     "@tailwindcss/vite": "^4.1.10",
     "axios": "^1.10.0",
     "collect.js": "^4.36.1",
+    "js-cookie": "^3.0.5",
     "pocketbase": "^0.26.1",
     "vue": "^3.5.13",
     "vue-carousel": "^0.18.0",

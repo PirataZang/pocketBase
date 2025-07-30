@@ -1,41 +1,158 @@
+@use 'colors.scss';
+
 .products {
-    padding: 30px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    padding: 10px 10%;
+    justify-content: center;
 
-    .carouselImages {
-        height: 500px;
-        width: 100%;
-        background: #e9e9e9;
+    .productsInfo {
+        padding: 30px 0px;
         display: flex;
-        padding: 30px;
-        border-radius: 10px;
+        flex-direction: row;
+        gap: 15px;
+        height: 100%;
 
-        .carousel {
+        .informations {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            height: 100%;
+        }
+
+
+        .title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: black;
+        }
+
+        // Detalhes do Produto
+        div.details {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 500px;
+            word-wrap: break-word;
+
+            .detailText {
+                font-size: 18px;
+            }
+
+            .detailItem {
+                font-size: 13px;
+            }
+
+            .showSize {
+                font-size: 11px;
+                cursor: pointer;
+                font-weight: 600;
+            }
+
+            .sizeInfo {
+                overflow-x: auto;
+
+                .sizeTable {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 12px;
+                }
+
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    border: 1px solid #dcdcdc;
+                    border-radius: 6px;
+                    overflow: hidden;
+                    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+                }
+
+                thead {
+                    background-color: orange;
+                    color: white;
+                    font-size: 14px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+
+                th,
+                td {
+                    padding: 5px;
+                    text-align: center;
+                    font-size: 10px;
+                }
+
+                .sizeTr {
+                    background-color: #f9f9f9;
+                    border-top: 1px solid #e0e0e0;
+
+                    &:nth-child(odd) {
+                        background-color: #f1f1f1;
+                    }
+
+                    &:hover {
+                        background-color: #ffe8c2;
+                    }
+
+                    .sizeTd {
+                        font-size: 11px;
+                    }
+                }
+            }
+        }
+
+        // Carrossel de imagens
+        .carouselImages {
+            height: 100%;
+            flex: 4;
             width: 100%;
+            background: colors.$primary-color;
+            display: flex;
+            padding: 10px;
+            border-radius: 10px;
 
-            li {
-                position: relative;
+            .carousel {
                 width: 100%;
-                height: 100%;
+                z-index: 0;
 
-                img {
+                li {
+                    position: relative;
                     width: 100%;
                     height: 100%;
-                    position: relative;
-                    object-fit: cover;
+
+                    img {
+                        height: 100%;
+                        position: relative;
+                        object-fit: cover;
+                        border-radius: 10px;
+                    }
                 }
             }
 
+            .carousel__prev,
+            .carousel__next {
+                background-color: #ffffff;
+                margin: 0 15px;
+                border-radius: 50%;
+                height: 40px;
+                padding: 0px;
+                width: auto;
+            }
         }
 
-        // img {
-        //     border-radius: 8px;
-        //     width: 100%;
-        //     height: 100%;
-        //     object-fit: cover;
-        // }
+        // Preços
+        .prices {
+            display: flex;
+            flex-direction: column;
+
+        }
+    }
+
+
+
+    .desc {
+        display: flex;
     }
 
 }
