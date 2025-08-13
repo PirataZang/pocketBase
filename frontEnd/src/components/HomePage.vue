@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div class="md:w-1/2 flex justify-center">
-                    <img src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/skwgyqrbfzhu6uyeh0gg/air-force-1-07-mens-shoes-jBrhbr.png" alt="Tênis Nike Air Force 1" class="w-full max-w-md transform rotate-6 hover:rotate-0 transition duration-500">
+                    <img src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/skwgyqrbfzhu6uyeh0gg/air-force-1-07-mens-shoes-jBrhbr.png" class="w-full max-w-md transform rotate-6 hover:rotate-0 transition duration-500">
                 </div>
             </div>
         </section>
@@ -39,8 +39,8 @@
             </div>
         </div>
 
-        <ProductListSimple :products="featured?.items" />
-        <ProductListSimple title="Novidades" :products="news" />
+        <ProductListSimple :limit="4" title="Destaques" :products="featured?.items" />
+        <ProductListSimple title="Novidades" :products="news?.items" />
         
     </div>
 </template>
@@ -64,32 +64,12 @@ export default {
                 perPage: 50,
                 page: 1
             },
-            news: [
-                {
-                    id: 1,
-                    title: 'Nike Air Force 1',
-                    price: '799,90',
-                    image: 'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/skwgyqrbfzhu6uyeh0gg/air-force-1-07-mens-shoes-jBrhbr.png'
-                },
-                {
-                    id: 2,
-                    title: 'Nike Air Max 270 React',
-                    price: '899,90',
-                    image: 'https://cdn.shoppub.io/cdn-cgi/image/w=1000,h=1000,q=80,f=auto/spacetennis/media/uploads/produtos/foto/nkswtqvj/574.jpg'
-                },
-                {
-                    id: 3,
-                    title: 'Nike Air Max 270 React',
-                    price: '659,90',
-                    image: 'https://imgnike-a.akamaihd.net/1300x1300/028983IEA1.jpg'
-                },
-                {
-                    id: 4,
-                    title: 'Nike Air Max 270 React',
-                    price: '379,90',
-                    image: 'https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/5d42aa4c-6955-4e76-b0a4-523686dd4eac/NIKE+REVOLUTION+7.png'
-                }
-            ]
+            news: {
+                items: [],
+                totalItems: 0,
+                perPage: 50,
+                page: 1
+            }
         }
     },
 
@@ -114,10 +94,14 @@ export default {
 
          async getProducts() {
             try {
-                const resultList = await pb.collection('Products').getList(1, 50, {
+                const resultListFeatured = await pb.collection('Products').getList(1, 25, {
                     filter: 'featured = true',
                 });
-                this.featured = resultList
+                const resultList = await pb.collection('Products').getList(1, 50, {
+                    filter: 'featured = false',
+                });
+                this.featured = resultListFeatured
+                this.news = resultList
             } catch (err) {
                 console.error('Erro ao buscar produtos:', err)
             }
